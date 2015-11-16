@@ -1,55 +1,30 @@
 #!/usr/bin/env python
 # coding:utf-8
-# By eathings
-import sys
 import string
 import itertools
 
 __author__ = 'VDTConstructor'
 
 
-def get_strings(secret_min=1, secret_max=2):
+def verify_function(candidate_password):
+	"""verify the candidate_password whether it works"""
+	return False, candidate_password
+	return True, candidate_password
+
+
+def verify_password(password_length_range, verify_function):
 	# chars = string.printable[:10]
 	# chars = string.printable[:-9]
 	chars = string.printable[:62]
 	print chars
-	strings = []
-	for x in itertools.product(chars, repeat=5):
-		''.join(x)
 
-	for i in xrange(secret_min, secret_max + 1):
-		strings.append((itertools.product(chars, repeat=i),))
-	return itertools.chain(*strings)
-
-
-def make_dict():
-	f = open(file, 'a')
-	for x in list_str:
-		for y in x:
-			f.write("".join(y))
-			f.write('\n')
-	f.close()
-	print 'Done'
-
-
-def write_dict_for_crack():
-	global min, max, list_str, file
-	while True:
-		if len(sys.argv) == 4:
-			try:
-				min = int(sys.argv[1])
-				max = int(sys.argv[2])
-			except:
-				print "wrong"
-				sys.exit(0)
-		if min <= max:
-			list_str = get_strings()
-			file = sys.argv[3]
-			make_dict()
-			sys.exit(0)
+	for i in xrange(password_length_range['min_length'], password_length_range['max_length'] + 1):
+		for candidate_secret in itertools.product(chars, repeat=5):
+			works_or_not = verify_function(''.join(candidate_secret))
+			if works_or_not[0]:
+				print works_or_not[1]
+				return
 
 
 if __name__ == '__main__':
-	# write_dict_for_crack()
-	get_strings(1, 2)
-
+	verify_password({'min_length': 1, 'max_length': 2}, verify_function)
