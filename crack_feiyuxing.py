@@ -14,8 +14,8 @@ def get_strings(secret_min=1, secret_max=2):
 	chars = string.printable[:62]
 	print chars
 	strings = []
-	for x in itertools.product(chars, repeat=2):
-		print ''.join(x)
+	for x in itertools.product(chars, repeat=5):
+		''.join(x)
 
 	for i in xrange(secret_min, secret_max + 1):
 		strings.append((itertools.product(chars, repeat=i),))
