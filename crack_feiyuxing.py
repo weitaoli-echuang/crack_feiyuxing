@@ -8,6 +8,7 @@ __author__ = 'VDTConstructor'
 
 def verify_function(candidate_password):
 	"""verify the candidate_password whether it works"""
+	if 
 	return False, candidate_password
 	return True, candidate_password
 
